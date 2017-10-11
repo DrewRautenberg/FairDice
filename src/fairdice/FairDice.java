@@ -33,16 +33,16 @@ public class FairDice {
         int c6 = 0;
         int roll;
 
-        Random randomNum=new Random();
+        Random randomNum = new Random();
 
         //------------------------------------------------ DO N ROLLS OF A DICE
         // FYI:  EACH roll requires:  roll 1 dice
         //                            a switch to ++ one of the 6 counters
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        for (int i=0;i<n;i++){
-            roll=randomNum.nextInt(6);
-            switch (roll){
+        for (int i = 0; i < n; i++) {
+            roll = randomNum.nextInt(6);
+            switch (roll) {
                 case 0:
                     c1++;
                     break;
@@ -65,7 +65,7 @@ public class FairDice {
         }
         //DECIDE FAIRNESS & WRITE FINAL ANSWER
         boolean isFair;
-        isFair = decideIfFair(n,tolerancePct,c1,c2,c3,c4,c5,c6);
+        isFair = decideIfFair(n, tolerancePct, c1, c2, c3, c4, c5, c6);
         if (isFair)
             System.out.println("\tdice is FAIR");
         else
@@ -92,27 +92,22 @@ public class FairDice {
     //                  of 4 is not within tolerance
     //          CONCLUSION:  dice is NOT FAIR
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    private static boolean decideIfFair(int n,int tolerancePct,int c1,int c2,int c3,int c4,int c5,int c6) {
+    private static boolean decideIfFair(int n, int tolerancePct, int c1, int c2, int c3, int c4, int c5, int c6) {
         boolean fair;
         int maxNum;
         int minNum;
         int diff;
         int equality;
         double toleranceAmount;
-        double percent=tolerancePct/100;
+        double percent = tolerancePct / 100;
 
-        maxNum=Math.max(c1,Math.max(c2,Math.max(c3,Math.max(c4,Math.max(c5,c6)))));
-        minNum=Math.min(c1,Math.min(c2,Math.min(c3,Math.min(c4,Math.min(c5,c6)))));
-        diff = maxNum-minNum;
-        equality=n/6;
-        toleranceAmount=percent*equality;
+        maxNum = Math.max(c1, Math.max(c2, Math.max(c3, Math.max(c4, Math.max(c5, c6)))));
+        minNum = Math.min(c1, Math.min(c2, Math.min(c3, Math.min(c4, Math.min(c5, c6)))));
+        diff = maxNum - minNum;
+        equality = n / 6;
+        toleranceAmount = percent * equality;
 
-        if (diff <=((toleranceAmount*2)+1)){
-            fair=true;
-        }
-        else{
-            fair=false;
-        }
+        fair = diff <= ((toleranceAmount * 2) + 1);
         System.out.printf("FYI:  Doing %d rolls with tolerance of %d percent\n",
                 n, tolerancePct);
         System.out.printf("\twhere 6 counts are: %d, %d, %d, %d, %d, %d\n", c1, c2, c3, c4, c5, c6);
