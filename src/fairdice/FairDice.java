@@ -15,6 +15,9 @@
  *              - that should help on the fairness judgement.
  ****************************************************************************/
 package fairdice;
+
+import java.util.Random;
+
 public class FairDice {
 
     public static void main(String[] args) {
@@ -28,22 +31,41 @@ public class FairDice {
         int c4 = 0;
         int c5 = 0;
         int c6 = 0;
+        int roll;
 
-        // >>>>> WRITE CODE HERE for declaring Random
+        Random randomNum=new Random();
 
         //------------------------------------------------ DO N ROLLS OF A DICE
         // FYI:  EACH roll requires:  roll 1 dice
         //                            a switch to ++ one of the 6 counters
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        // >>>>> WRITE CODE HERE for doing the n rolls
-
-
-
-
-        //-------------------------------- DECIDE FAIRNESS & WRITE FINAL ANSWER 
+        for (int i=0;i<n;i++){
+            roll=randomNum.nextInt(6);
+            switch (roll){
+                case 0:
+                    c1++;
+                    break;
+                case 1:
+                    c2++;
+                    break;
+                case 2:
+                    c3++;
+                    break;
+                case 3:
+                    c4++;
+                    break;
+                case 4:
+                    c5++;
+                    break;
+                case 5:
+                    c6++;
+                    break;
+            }
+        }
+        //DECIDE FAIRNESS & WRITE FINAL ANSWER
         boolean isFair = true;
-//        isFair = decideIfFair(n,tolerancePct,c1,c2,c3,c4,c5,c6);       
+        isFair = decideIfFair(n,tolerancePct,c1,c2,c3,c4,c5,c6);
         if (isFair)
             System.out.println("\tdice is FAIR");
         else
@@ -70,15 +92,16 @@ public class FairDice {
     //                  of 4 is not within tolerance
     //          CONCLUSION:  dice is NOT FAIR
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//    private static boolean decideIfFair( >>>>> WRITE PARAMETERS HERE ) {
-
-    // >>>>> WRITE METHOD BODY HERE to implement above algorithm
-
+    private static boolean decideIfFair(int n,int tolerancePct,int c1,int c2,int c3,int c4,int c5,int c6) {
+        int maxNum;
+        boolean fair = false;
+        maxNum=Math.max(c1,Math.max(c2,Math.max(c3,Math.max(c4,Math.max(c5,c6)))));
+        System.out.println(maxNum);
 
 //        System.out.printf("FYI:  Doing %d rolls with tolerance of %d percent\n",
 //                n, tolerancePct);  
 //        System.out.printf("\twhere 6 counts are: %d, %d, %d, %d, %d, %d\n",
 //                c1, c2, c3, c4, c5, c6);
-//    }
-    //-------------------------------------------------------------------------
+        return fair;
+    }
 } // END OF FairDice CLASS
