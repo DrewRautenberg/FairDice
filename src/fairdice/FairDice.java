@@ -25,12 +25,12 @@ public class FairDice {
         //----------------------------------------- DECLARE VARIABLES & OBJECTS
         int n = 60;                            // number of rolls to do
         int tolerancePct = 10;                 // % - see decideIfFair comments
-        int c1 = 0;                            // the 6 counters
-        int c2 = 0;
-        int c3 = 0;
-        int c4 = 0;
-        int c5 = 0;
-        int c6 = 0;
+        int c1 = 10;                           // the 6 counters
+        int c2 = 9;
+        int c3 = 8;
+        int c4 = 10;
+        int c5 = 12;
+        int c6 = 11;
         int roll;
 
         Random randomNum=new Random();
@@ -40,29 +40,29 @@ public class FairDice {
         //                            a switch to ++ one of the 6 counters
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        for (int i=0;i<n;i++){
-            roll=randomNum.nextInt(6);
-            switch (roll){
-                case 0:
-                    c1++;
-                    break;
-                case 1:
-                    c2++;
-                    break;
-                case 2:
-                    c3++;
-                    break;
-                case 3:
-                    c4++;
-                    break;
-                case 4:
-                    c5++;
-                    break;
-                case 5:
-                    c6++;
-                    break;
-            }
-        }
+        //for (int i=0;i<n;i++){
+        //    roll=randomNum.nextInt(6);
+        //    switch (roll){
+        //        case 0:
+        //            c1++;
+        //            break;
+        //        case 1:
+        //            c2++;
+        //            break;
+        //        case 2:
+        //            c3++;
+        //            break;
+        //        case 3:
+        //            c4++;
+        //            break;
+        //        case 4:
+        //            c5++;
+        //            break;
+        //        case 5:
+        //            c6++;
+        //            break;
+        //    }
+        //}
         //DECIDE FAIRNESS & WRITE FINAL ANSWER
         boolean isFair;
         isFair = decideIfFair(n,tolerancePct,c1,c2,c3,c4,c5,c6);
@@ -99,12 +99,13 @@ public class FairDice {
         int diff;
         int equality;
         double toleranceAmount;
+        double percent=tolerancePct/100;
 
         maxNum=Math.max(c1,Math.max(c2,Math.max(c3,Math.max(c4,Math.max(c5,c6)))));
         minNum=Math.min(c1,Math.min(c2,Math.min(c3,Math.min(c4,Math.min(c5,c6)))));
         diff = maxNum-minNum;
         equality=n/6;
-        toleranceAmount=tolerancePct*equality;
+        toleranceAmount=percent*equality;
 
         if (diff <=((toleranceAmount*2)+1)){
             fair=true;
