@@ -94,14 +94,16 @@ public class FairDice {
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private static boolean decideIfFair(int n,int tolerancePct,int c1,int c2,int c3,int c4,int c5,int c6) {
         int maxNum;
+        int minNum;
+        int diff;
         boolean fair = false;
         maxNum=Math.max(c1,Math.max(c2,Math.max(c3,Math.max(c4,Math.max(c5,c6)))));
-        System.out.println(maxNum);
+        minNum=Math.min(c1,Math.min(c2,Math.min(c3,Math.min(c4,Math.min(c5,c6)))));
+        diff = maxNum-minNum;
 
 //        System.out.printf("FYI:  Doing %d rolls with tolerance of %d percent\n",
 //                n, tolerancePct);  
-//        System.out.printf("\twhere 6 counts are: %d, %d, %d, %d, %d, %d\n",
-//                c1, c2, c3, c4, c5, c6);
+        System.out.printf("\twhere 6 counts are: %d, %d, %d, %d, %d, %d\n", c1, c2, c3, c4, c5, c6);
         return fair;
     }
 } // END OF FairDice CLASS
