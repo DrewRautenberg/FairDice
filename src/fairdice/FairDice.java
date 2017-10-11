@@ -64,7 +64,7 @@ public class FairDice {
             }
         }
         //DECIDE FAIRNESS & WRITE FINAL ANSWER
-        boolean isFair = true;
+        boolean isFair;
         isFair = decideIfFair(n,tolerancePct,c1,c2,c3,c4,c5,c6);
         if (isFair)
             System.out.println("\tdice is FAIR");
@@ -83,7 +83,7 @@ public class FairDice {
     //          [the 2* part allows for tolerance above/below equality
     //                  and the +1 includes equality itself]
     // EXAMPLE:  given n of 60, with counts of 10,9,8,10,12,11
-    //           diffence is 12 - 8 which is 4
+    //           difference is 12 - 8 which is 4
     //           equality would be 60 / 6 which is 10
     //           given tolerancePct of 10 (0.10 in calculations)
     //           toleranceAmount is 0.10 * 10 which is 1
@@ -93,13 +93,26 @@ public class FairDice {
     //          CONCLUSION:  dice is NOT FAIR
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private static boolean decideIfFair(int n,int tolerancePct,int c1,int c2,int c3,int c4,int c5,int c6) {
+        boolean fair;
         int maxNum;
         int minNum;
         int diff;
-        boolean fair = false;
+        int equality;
+        double toleranceAmount;
+
         maxNum=Math.max(c1,Math.max(c2,Math.max(c3,Math.max(c4,Math.max(c5,c6)))));
         minNum=Math.min(c1,Math.min(c2,Math.min(c3,Math.min(c4,Math.min(c5,c6)))));
         diff = maxNum-minNum;
+        equality=n/6;
+        toleranceAmount=tolerancePct*equality;
+
+        if (diff <=((toleranceAmount*2)+1)){
+            fair=true;
+        }
+        else{
+            fair=false;
+        }
+
 
 //        System.out.printf("FYI:  Doing %d rolls with tolerance of %d percent\n",
 //                n, tolerancePct);  
