@@ -107,7 +107,12 @@ public class FairDice {
         equality = n / 6;
         toleranceAmount = percent * equality;
 
-        fair = diff <= ((toleranceAmount * 2) + 1);
+        if (diff <= ((toleranceAmount * 2) + 1)) {
+            fair = true;
+        }
+        else {
+            fair = false;
+        }
         System.out.printf("FYI:  Doing %d rolls with tolerance of %d percent\n",
                 n, tolerancePct);
         System.out.printf("\twhere 6 counts are: %d, %d, %d, %d, %d, %d\n", c1, c2, c3, c4, c5, c6);
